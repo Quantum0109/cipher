@@ -1,22 +1,45 @@
 import string
 
-alphebet = string.ascii_lowercase + string.ascii_uppercase
-alphebet += "0123456789_-"
-
-
+alphebet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+alphebet_digits = len(str(len(alphebet)))
 
 def encode(text: str) -> str:
     result = ""
     for i in text:
-        if len(str(alphebet.index(i))) == 1:
-            result += "0" + str(alphebet.index(i))
+        if i not in alphebet:
+            return ""
+        a = alphebet.index(i)
+        alphebet_digits = len(str(len(alphebet)))
+        if len(str(a)) == alphebet_digits:
+            result += str(a)
         else:
-            result += str(alphebet.index(i))
+            zeroes = alphebet_digits - len(str(a))
+            for j in range(zeroes):
+                    result += "0"
+            result += str(a)
     return result
 
+
 def decode(text: str) -> str:
-    """
-        пробежать по 2
-        если 1 0 то откидываем 
-        тщем индекс в алвовите и ретёрн по индексу из алфовита
-    """
+    result_decode = ""
+    slices = len(text) // alphebet_digits
+    step = 0
+    for i in range(slices):
+        b = text[step:step + alphebet_digits] 
+        if b == "000":
+            result_decode += alphebet[0]
+        else:
+            idx = b.lstrip("0")
+            result_decode += alphebet[int(idx)]
+        step += alphebet_digits
+    return result_decode
+
+print(decode(encode("Vasya")))
+
+
+
+
+
+
+
+
