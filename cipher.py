@@ -1,6 +1,7 @@
 alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 alphabet = alphabet + alphabet.upper()
 
+#слово которое нежно зашифровать
 message = "слово"
 
 def encrypt(message: str, shift: int) -> str:
@@ -20,3 +21,9 @@ def deciphement(message_encrypted: str, func) -> str:
 
 print(encrypt(message, 1))
 deciphement(message_encrypted, encrypt)
+"""
+    TODO
+    Добавить tkinter
+    Убрать cmd 
+    Сделать .exe файл
+"""
